@@ -2,6 +2,7 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import { Layout, Menu, Icon } from 'antd';
 import { Logo } from './style';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 const { Sider } = Layout;
 
@@ -25,12 +26,16 @@ class SideMenu extends React.Component {
         <Logo>Foss</Logo>
         <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
           <Menu.Item key='1'>
-            <Icon type='team' />
-            <span>Account</span>
+            <Link to='/'>
+              <Icon type='team' />
+              <span>Account</span>
+            </Link>
           </Menu.Item>
           <Menu.Item key='2'>
-            <Icon type='account-book' />
-            <span>Beneficiaries</span>
+            <Link to='/beneficiaries'>
+              <Icon type='account-book' />
+              <span>Beneficiaries</span>
+            </Link>
           </Menu.Item>
           <Menu.Item key='3'>
             <Icon type='pay-circle' />
