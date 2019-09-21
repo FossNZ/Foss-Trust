@@ -1,5 +1,5 @@
 import { createEpicMiddleware } from 'redux-observable';
-import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory, History } from 'history';
 import { ApiRx } from '@polkadot/api';
 import { applyMiddleware, createStore, compose } from 'redux';
 import { composeWithDevTools } from 'remote-redux-devtools';
@@ -10,24 +10,24 @@ import { Observable } from 'rxjs';
 import { InjectedAccount } from '../types/type';
 import actions from './actions';
 
-export const history = createHistory();
+export const history: History = createBrowserHistory();
 
 const typeDefs = {
-	BeneficiaryShare: {
-		address: 'AccountId',
-		weight: 'u64'
-	},
-	LivingSwitchCond: {
-		_enum: {
-			None: "Null",
-			BlockHeight: "BlockNumber",
-			Timestamp: "Moment",
-			ClockInInterval: "BlockNumber"
-		}
-	}
-}
+  BeneficiaryShare: {
+    address: 'AccountId',
+    weight: 'u64'
+  },
+  LivingSwitchCond: {
+    _enum: {
+      None: 'Null',
+      BlockHeight: 'BlockNumber',
+      Timestamp: 'Moment',
+      ClockInInterval: 'BlockNumber'
+    }
+  }
+};
 
-const api = ApiRx.create({types: typeDefs});
+const api = ApiRx.create({ types: typeDefs });
 
 // const api = ApiRx.create({provider: new WsProvider('wss://poc3-rpc.polkadot.io/')});
 
@@ -37,7 +37,8 @@ const epicMiddleware = createEpicMiddleware({
 
 export type EpicDependencies = { api$: Observable<ApiRx> };
 
-const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers =
+  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
   reducers,
@@ -45,7 +46,7 @@ const store = createStore(
 );
 
 window.addEventListener('load', () => {
-  store.dispatch({type: actions.INIT});
+  store.dispatch({ type: actions.INIT });
 });
 
 epicMiddleware.run(epics);

@@ -25,7 +25,12 @@ const AccountPage: React.FunctionComponent<Props> = props => {
 
   const menuItems = accounts.map((account, i) => {
     return (
-      <Menu.Item key={i} onClick={() => {setMainAccount(accounts[i]);}}>
+      <Menu.Item
+        key={i}
+        onClick={() => {
+          setMainAccount(accounts[i]);
+        }}
+      >
         {account.name}
       </Menu.Item>
     );

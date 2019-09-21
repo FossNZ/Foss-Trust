@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import 'antd/dist/antd.css';
 import { InjectedAccount } from '../../types/type';
-import Wrapper from '../../components/Wrapper/index';
 import styled from 'styled-components';
-import { Icon, Input, InputNumber, Button, DatePicker } from 'antd';
+import { Icon, Input } from 'antd';
 import Particles from 'react-particles-js';
-import BeneficiariesPage from '../../components/beneficiaries/index';
+import { History } from 'history';
 
 const HomeWrapper = styled.div`
   display: flex;
@@ -19,12 +18,6 @@ const GrantorWrapper = styled.div`
 const BeneficiaryWrapper = styled.div`
   flex: 1;
   position: relative;
-`;
-
-const InputSection = styled.div`
-  position: absolute;
-  top: 30%;
-  left: 30%;
 `;
 
 const RoleSection = styled.div`
@@ -42,9 +35,44 @@ const RoleSection = styled.div`
   }
 `;
 
+const getBgParticles = (background: string) => (
+  <Particles
+    width='50vw'
+    height='100vh'
+    params={{
+      particles: {
+        size: {
+          value: 5,
+          random: true,
+          anim: {
+            enable: false,
+            speed: 80,
+            size_min: 0.1,
+            sync: false
+          }
+        },
+        line_linked: {
+          enable: true,
+          distance: 200,
+          opacity: 0.4,
+          width: 1,
+          shadow: {
+            enable: true,
+            color: '#ffffff'
+          }
+        }
+      }
+    }}
+    style={{
+      background
+    }}
+  />
+);
+
 type Props = {
   accounts: InjectedAccount[];
   mainAccount: InjectedAccount;
+  history: History;
 };
 
 const HomePage: React.FunctionComponent<Props> = props => {
@@ -54,80 +82,23 @@ const HomePage: React.FunctionComponent<Props> = props => {
   return (
     <HomeWrapper>
       <GrantorWrapper>
-        <Particles
-          width='50vw'
-          height='100vh'
-          params={{
-            particles: {
-              size: {
-                value: 5,
-                random: true,
-                anim: {
-                  enable: false,
-                  speed: 80,
-                  size_min: 0.1,
-                  sync: false
-                }
-              },
-              line_linked: {
-                enable: true,
-                distance: 200,
-                opacity: 0.4,
-                width: 1,
-                shadow: {
-                  enable: true,
-                  color: '#ffffff'
-                }
-              }
-            }
-          }}
-          style={{
-            background:
-              'linear-gradient(122deg, rgba(28,8,36,1) 5%, rgba(68,9,121,1) 26%, rgba(69,130,196,1) 95%)'
-          }}
-        />
+        {getBgParticles(
+          'linear-gradient(122deg, rgba(28,8,36,1) 5%, rgba(68,9,121,1) 26%, rgba(69,130,196,1) 95%)'
+        )}
         <RoleSection
           onClick={() => {
             setGrantorAddress(null);
             setShowInput(false);
+            props.history.push('./grantorHome');
           }}
         >
           Grantor
         </RoleSection>
       </GrantorWrapper>
       <BeneficiaryWrapper>
-        <Particles
-          width='50vw'
-          height='100vh'
-          params={{
-            particles: {
-              size: {
-                value: 5,
-                random: true,
-                anim: {
-                  enable: false,
-                  speed: 80,
-                  size_min: 0.1,
-                  sync: false
-                }
-              },
-              line_linked: {
-                enable: true,
-                distance: 200,
-                opacity: 0.4,
-                width: 1,
-                shadow: {
-                  enable: true,
-                  color: '#ffffff'
-                }
-              }
-            }
-          }}
-          style={{
-            background:
-              'linear-gradient(264deg, rgba(34,48,101,1) 5%, rgba(140,85,190,1) 40%, rgba(78,137,201,1) 95%)'
-          }}
-        />
+        {getBgParticles(
+          'linear-gradient(257deg, rgba(30,48,111,1) 26%, rgba(122,63,179,1) 65%, rgba(92,150,214,1) 95%)'
+        )}
         {
           <RoleSection onClick={() => setShowInput(true)}>
             Beneficiary

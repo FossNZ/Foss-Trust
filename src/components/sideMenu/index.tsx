@@ -17,6 +17,11 @@ class SideMenu extends React.Component {
   };
 
   render() {
+    const activeKey = [
+      '/grantorhome',
+      '/beneficiaries',
+      '/conditions'
+    ].findIndex(value => value === window.location.pathname);
     return (
       <Sider
         collapsible
@@ -24,26 +29,31 @@ class SideMenu extends React.Component {
         onCollapse={this.onCollapse}
       >
         <Logo>FOSS</Logo>
-        <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
-          <Menu.Item key='1'>
-            <Link to='/'>
+        <Menu
+          theme='dark'
+          defaultSelectedKeys={['1']}
+          selectedKeys={[`${activeKey}`]}
+          mode='inline'
+        >
+          <Menu.Item key='0'>
+            <Link to='/grantorhome'>
               <Icon type='team' />
               <span>Account</span>
             </Link>
           </Menu.Item>
-          <Menu.Item key='2'>
+          <Menu.Item key='1'>
             <Link to='/beneficiaries'>
               <Icon type='account-book' />
               <span>Beneficiaries</span>
             </Link>
           </Menu.Item>
-          <Menu.Item key='3'>
+          <Menu.Item key='2'>
             <Link to='/conditions'>
               <Icon type='pay-circle' />
               <span>Conditions</span>
             </Link>
           </Menu.Item>
-          <Menu.Item key='4'>
+          <Menu.Item key='3'>
             <Icon type='calendar' />
             <span>Scheduling Pay</span>
           </Menu.Item>
