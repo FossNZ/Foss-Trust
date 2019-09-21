@@ -1,7 +1,8 @@
 import { AnyAction } from "redux";
 import actions from "../actions";
+import { InjectedAccount } from "../../types/type";
 
-const initialState: Account[] = [];
+const initialState: InjectedAccount[] = [];
 
 const accountsReducer = (state = initialState, action: AnyAction ) => {
     switch (action.type) {
