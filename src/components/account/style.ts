@@ -10,7 +10,12 @@ export const Name = styled.div`
   display: flex;
 `;
 
-export const AccountName = styled.div`
+export const AccountInfo = styled.div`
+  font-size: 1rem;
+`;
+
+export const Text = styled.div`
+  font-size: 1rem;
 `;
 
 export const Bold = styled.div`
