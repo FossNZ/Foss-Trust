@@ -1,19 +1,28 @@
 import { ofType, ActionsObservable, StateObservable, combineEpics } from 'redux-observable';
 import { AnyAction } from 'redux';
-import { switchMap, withLatestFrom } from 'rxjs/operators';
+import { switchMap, withLatestFrom, map } from 'rxjs/operators';
 import { Observable, combineLatest, of, EMPTY } from 'rxjs';
 import actions from '../actions';
 import { EpicDependencies } from '../store';
 import { push } from 'react-router-redux';
+import { AccountId } from '@polkadot/types/interfaces';
+import { u64 } from '@polkadot/types';
+import { State } from '../../types/state';
+import { Codec } from '@polkadot/types/types';
 
-export type Beneficiarie = {
-  beneficiary: string,
+export type BeneficiaryValue = {
+  address: string,
   weight: number
 }
 
-type BeneficiaresAction = {
-    type: string,
-    payload: Beneficiarie[]
+type UpdateBeneficiaresAction = {
+  type: string,
+  payload: BeneficiaryValue[]
+}
+
+export interface Beneficiary extends Codec {
+  address: AccountId,
+  weight: u64
 }
 
 const beneficiariesEpic = (
@@ -23,7 +32,7 @@ const beneficiariesEpic = (
 ): Observable<AnyAction> =>
   combineLatest([
       api$,
-      action$.pipe(ofType<BeneficiaresAction>(actions.SET_BENEFICIARIES))
+      action$.pipe(ofType<UpdateBeneficiaresAction>(actions.UPDATE_BENEFICIARIES))
   ]).pipe(
     withLatestFrom(state$),
     switchMap(([[api, {payload}], {mainAccount}]) => {
@@ -50,36 +59,22 @@ const beneficiariesEpic = (
   );
 
   const fetchBeneficiariesEpic = (
-      action$: ActionsObservable<AnyAction>,
-      state$: StateObservable<any>,
-      {api$}: EpicDependencies
-      ): Observable<AnyAction> =>
+    action$: ActionsObservable<any>,
+    state$: StateObservable<State>,
+    {api$}: EpicDependencies
+    ): Observable<AnyAction> =>
       combineLatest([
           api$,
           action$.pipe(ofType(actions.FETCH_BENEFICIARES))
       ]).pipe(
         withLatestFrom(state$),
-        switchMap(([[api, {payload}], {mainAccount}]) => {
-          return api.query.trustFund.beneficiaries(payload).signAndSend(mainAccount.address)
-        }),
-        switchMap(({
-          events = [],
-          status
-        }) => {
-          if (status.isFinalized) {
-              for (const {
-                      event: {
-                          method,
-                          data
-                      }
-                  } of events) {
-                      if (method === 'BeneficiariesSet') {
-                          return of(push('/grantorhome')) // TODO: jump to grantorhome
-                      }
-              }
-          }
-          return EMPTY;
+        switchMap(([[api], {mainAccount}]) => 
+            api.query.trustFund.beneficiaries(mainAccount.address)),
+        map(beneficiaries => ({
+          type: actions.SET_BENEFICIARIES,
+          payload: beneficiaries
         })
+        )
       );
 
 export default combineEpics(beneficiariesEpic, fetchBeneficiariesEpic);
