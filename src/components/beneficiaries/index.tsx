@@ -4,7 +4,11 @@ import { InjectedAccount } from '../../types/type';
 import { Icon, Menu, Dropdown } from 'antd';
 import Wrapper from '../../components/Wrapper/index';
 import styled from 'styled-components';
+<<<<<<< HEAD
 import { Input, InputNumber, Form } from 'antd';
+=======
+import { Input, InputNumber } from 'antd';
+>>>>>>> master
 
 const TitleWrapper = styled.div`
   display: flex;
