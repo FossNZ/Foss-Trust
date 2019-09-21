@@ -38,8 +38,10 @@ class SideMenu extends React.Component {
             </Link>
           </Menu.Item>
           <Menu.Item key='3'>
-            <Icon type='pay-circle' />
-            <span>Payment</span>
+            <Link to='/conditions'>
+              <Icon type='pay-circle' />
+              <span>Conditions</span>
+            </Link>
           </Menu.Item>
           <Menu.Item key='4'>
             <Icon type='calendar' />
