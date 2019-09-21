@@ -1,9 +1,9 @@
 import { ofType, ActionsObservable, StateObservable } from "redux-observable";
 import { AnyAction } from "redux";
-import { map, switchMap, withLatestFrom} from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import actions from "../actions";
 import { EpicDependencies } from '../store';
-import { combineLatest, Observable, merge, from } from 'rxjs';
+import { combineLatest, Observable, from } from 'rxjs';
 import { InjectedAccount } from "../../types/type";
 
 const initSignerEpic = (
