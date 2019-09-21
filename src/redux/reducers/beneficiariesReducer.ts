@@ -3,7 +3,7 @@ import actions from "../actions";
 
 const initialState  = {};
 
-const BeneficiariesReducer = (state = initialState, action: AnyAction ) => {
+const beneficiariesReducer = (state = initialState, action: AnyAction ) => {
     switch (action.type) {
         case actions.SET_BENEFICIARIES: {
             return action.payload;
@@ -13,4 +13,4 @@ const BeneficiariesReducer = (state = initialState, action: AnyAction ) => {
     }
 }
 
-export default BeneficiariesReducer;
+export default beneficiariesReducer;
