@@ -3,7 +3,7 @@ import { State } from '../../types/state';
 import BeneficiariesPage from './beneficiaires';
 import { Dispatch } from 'redux';
 import actions from '../../redux/actions';
-import { Beneficiarie } from '../../redux/epics/beneficiariesEpic';
+import { BeneficiaryValue } from '../../redux/epics/beneficiariesEpic';
 
 const mapStateToProps = ({ accounts, mainAccount, balances }: State) => ({
   accounts,
@@ -12,9 +12,9 @@ const mapStateToProps = ({ accounts, mainAccount, balances }: State) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  updateBeneficiaries: (beneficiaries: Beneficiarie[]) => {
+  updateBeneficiaries: (beneficiaries: BeneficiaryValue[]) => {
     dispatch({
-      type: actions.SET_BENEFICIARIES,
+      type: actions.UPDATE_BENEFICIARIES,
       payload: beneficiaries
     });
   },

@@ -1,7 +1,8 @@
 import { AnyAction } from "redux";
 import actions from "../actions";
+import { Beneficiary } from "../epics/beneficiariesEpic";
 
-const initialState  = {};
+const initialState: Beneficiary[]  = [];
 
 const beneficiariesReducer = (state = initialState, action: AnyAction ) => {
     switch (action.type) {

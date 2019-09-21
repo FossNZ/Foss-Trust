@@ -5,7 +5,7 @@ import { Icon, Button } from 'antd';
 import Wrapper from '../Wrapper/index';
 import styled from 'styled-components';
 import { Input, InputNumber } from 'antd';
-import { Beneficiarie } from '../../redux/epics/beneficiariesEpic';
+import { BeneficiaryValue } from '../../redux/epics/beneficiariesEpic';
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -41,13 +41,13 @@ const BeneficiaryWeight = styled.div`
 type Props = {
   accounts: InjectedAccount[];
   mainAccount: InjectedAccount;
-  updateBeneficiaries: (beneficiaries: Beneficiarie[]) => void;
+  updateBeneficiaries: (beneficiaries: BeneficiaryValue[]) => void;
 };
 
 const BeneficiariesPage: React.FunctionComponent<Props> = props => {
   const [beneficiaryAmount, setbeneficiaryAmount] = useState(1);
   const [beneficiaries, setBeneficiaires] = useState([
-    { beneficiary: '', weight: 1 }
+    { address: '', weight: 1 }
   ]);
 
   const { updateBeneficiaries } = props;
@@ -67,7 +67,7 @@ const BeneficiariesPage: React.FunctionComponent<Props> = props => {
               style={{ width: '50%' }}
               onChange={e => {
                 const value = {
-                  beneficiary: e.target.value,
+                  address: e.target.value,
                   weight: (beneficiaries[i] && beneficiaries[i].weight) || 1
                 };
                 setBeneficiaires(sortedBeneficiaries.concat(value));
@@ -82,8 +82,8 @@ const BeneficiariesPage: React.FunctionComponent<Props> = props => {
               defaultValue={1}
               onChange={value => {
                 const result = {
-                  beneficiary:
-                    (beneficiaries[i] && beneficiaries[i].beneficiary) || '',
+                  address:
+                    (beneficiaries[i] && beneficiaries[i].address) || '',
                   weight: value || 1
                 };
                 setBeneficiaires(sortedBeneficiaries.concat(result));

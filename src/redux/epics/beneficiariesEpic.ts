@@ -49,8 +49,12 @@ const beneficiariesEpic = (
                       data
                   }
               } of events) {
+                  console.log('ssss')
                   if (method === 'BeneficiariesSet') {
-                      return of(push('/grantorhome')) // TODO: jump to grantorhome
+                      // return of(push('/grantorhome')) // TODO: jump to grantorhome
+                    return of({
+                      type: actions.FETCH_BENEFICIARIES
+                    })
                   }
           }
       }
@@ -65,7 +69,7 @@ const beneficiariesEpic = (
     ): Observable<AnyAction> =>
       combineLatest([
           api$,
-          action$.pipe(ofType(actions.FETCH_BENEFICIARES))
+          action$.pipe(ofType(actions.FETCH_BENEFICIARIES))
       ]).pipe(
         withLatestFrom(state$),
         switchMap(([[api], {mainAccount}]) => 

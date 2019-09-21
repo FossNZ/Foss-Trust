@@ -1,10 +1,10 @@
-import { ofType, ActionsObservable, combineEpics, StateObservable } from 'redux-observable';
+import { ofType, ActionsObservable, combineEpics } from 'redux-observable';
 import { AnyAction } from 'redux';
-import {  map, withLatestFrom } from 'rxjs/operators';
+import {  map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import actions from '../actions';
 
-const setAccountEpic = (
+const setAccountBalancesEpic = (
   action$: ActionsObservable<AnyAction>
 ): Observable<AnyAction> =>
   action$.pipe(
@@ -15,6 +15,18 @@ const setAccountEpic = (
       }
     })
   );
+
+const setAccountBeneficiariesEpic = (
+    action$: ActionsObservable<AnyAction>
+  ): Observable<AnyAction> =>
+    action$.pipe(
+      ofType(actions.SET_MAIN_ACCOUNT),
+      map(() => {
+        return {
+          type: actions.FETCH_BENEFICIARIES
+        }
+      })
+    );
 
 const setAccountsEpic = (
   action$: ActionsObservable<AnyAction>,
@@ -29,4 +41,4 @@ const setAccountsEpic = (
     })
   );
 
-export default combineEpics(setAccountEpic, setAccountsEpic);
+export default combineEpics(setAccountBalancesEpic, setAccountBeneficiariesEpic, setAccountsEpic);

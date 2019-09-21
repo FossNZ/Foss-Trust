@@ -4,11 +4,14 @@ import { Breadcrumb } from 'antd';
 import { InjectedAccount } from '../../types/type';
 import Wrapper from '../../components/Wrapper/index';
 import AccountPage from '../../components/account/AccountPage';
+import { u128 } from '@polkadot/types';
+import { Beneficiary } from '../../redux/epics/beneficiariesEpic';
 
 type Props = {
   accounts: InjectedAccount[];
   mainAccount: InjectedAccount;
-  balances: any,
+  balances: u128[];
+  beneficiaries: Beneficiary[];
   setMainAccount: (account: InjectedAccount) => void;
 };
 
@@ -23,7 +26,7 @@ class GrantorHomePage extends React.Component {
   };
 
   render() {
-    const { accounts, mainAccount, balances, setMainAccount } = this.props as Props;
+    const { accounts, mainAccount, balances, setMainAccount, beneficiaries } = this.props as Props;
 
     return (
       <Wrapper>
@@ -50,6 +53,7 @@ class GrantorHomePage extends React.Component {
           <div>
             USTD: {balances[3] ? balances[3].toString() : 0}
           </div>
+          {beneficiaries.map(beneficiary => <div>{beneficiary.address.toString()} : {beneficiary.weight.toString()}</div>)}
         </div>
       </Wrapper>
     );
