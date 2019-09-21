@@ -4,7 +4,7 @@ import { InjectedAccount } from '../../types/type';
 import { Icon, Menu, Dropdown } from 'antd';
 import Wrapper from '../../components/Wrapper/index';
 import styled from 'styled-components';
-import { Input, InputNumber } from 'antd';
+import { Input, InputNumber, Form } from 'antd';
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -42,32 +42,59 @@ type Props = {
   mainAccount: InjectedAccount;
 };
 
-const BeneficiariesPage: React.FunctionComponent<Props> = props => (
-  <Wrapper>
-    <TitleWrapper>
-      <Title>Beneficiaries</Title>
-      <Icon type='plus' style={{ fontSize: '1.5rem', margin: '1rem' }} />
-    </TitleWrapper>
-    <BeneficiaryWrapper>
-      <BeneficiaryAddress>
-        <BeneficiaryTitle>Beneficiary:</BeneficiaryTitle>
-        <Input
-          placeholder='Enter beneficiary account'
-          onChange={value => console.log(value)}
-          style={{ width: '50%' }}
+const getBeneficiaryComponent = (number: number) => {
+  let beneficiaryComponent = [];
+  for (let i = 0; i < number; i++) {
+    beneficiaryComponent.push(
+      <BeneficiaryWrapper key={i}>
+        <BeneficiaryAddress>
+          <BeneficiaryTitle>Beneficiary:</BeneficiaryTitle>
+          <Input
+            placeholder='Enter beneficiary account'
+            onChange={value => console.log(value)}
+            style={{ width: '50%' }}
+          />
+        </BeneficiaryAddress>
+        <BeneficiaryWeight>
+          <BeneficiaryTitle>Weight:</BeneficiaryTitle>
+          <InputNumber
+            min={1}
+            max={10}
+            defaultValue={1}
+            onChange={value => console.log(value)}
+          />
+        </BeneficiaryWeight>
+      </BeneficiaryWrapper>
+    );
+  }
+
+  return beneficiaryComponent;
+};
+
+const BeneficiariesPage: React.FunctionComponent<Props> = props => {
+  const [beneficiaries, setBeneficiaires] = useState([]);
+  const [beneficiaryAmount, setbeneficiaryAmount] = useState(1);
+
+  return (
+    <Wrapper>
+      <TitleWrapper>
+        <Title>Beneficiaries</Title>
+        <Icon
+          type='plus'
+          style={{ fontSize: '1.5rem', margin: '1rem' }}
+          onClick={() => setbeneficiaryAmount(beneficiaryAmount + 1)}
         />
-      </BeneficiaryAddress>
-      <BeneficiaryWeight>
-        <BeneficiaryTitle>Weight:</BeneficiaryTitle>
-        <InputNumber
-          min={1}
-          max={10}
-          defaultValue={1}
-          onChange={value => console.log(value)}
-        />
-      </BeneficiaryWeight>
-    </BeneficiaryWrapper>
-  </Wrapper>
-);
+        {beneficiaryAmount > 1 && (
+          <Icon
+            type='minus'
+            style={{ fontSize: '1.5rem', margin: '1rem' }}
+            onClick={() => setbeneficiaryAmount(beneficiaryAmount - 1)}
+          />
+        )}
+      </TitleWrapper>
+      {getBeneficiaryComponent(beneficiaryAmount)}
+    </Wrapper>
+  );
+};
 
 export default BeneficiariesPage;
