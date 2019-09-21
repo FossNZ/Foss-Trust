@@ -5,7 +5,6 @@ import { Icon, Button } from 'antd';
 import Wrapper from '../../components/Wrapper/index';
 import styled from 'styled-components';
 import { Input, InputNumber } from 'antd';
-import { Formik } from 'formik';
 
 const TitleWrapper = styled.div`
   display: flex;
