@@ -5,6 +5,7 @@ import './style/App.css';
 import GrantorHomePage from './pages/grantorHome';
 import store from './redux/store';
 import BeneficiariesPage from './components/beneficiaries/index';
+import ConditionsPage from './components/conditions/index';
 
 const App: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const App: React.FC = () => {
         <Route exact path='/' component={GrantorHomePage} />
         <Route exact path='/grantorhome' component={GrantorHomePage} />
         <Route exact path='/beneficiaries' component={BeneficiariesPage} />
+        <Route exact path='/conditions' component={ConditionsPage} />
       </Router>
     </Provider>
   );
