@@ -49,7 +49,7 @@ const beneficiariesEpic = (
                   }
               } of events) {
                   if (method === 'BeneficiariesSet') {
-                    openNotification();
+                    openNotification('Set Beneficiaries Success');
                       // return of(push('/grantorhome')) // TODO: jump to grantorhome
                     return of({
                       type: actions.FETCH_BENEFICIARIES

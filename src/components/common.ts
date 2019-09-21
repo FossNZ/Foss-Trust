@@ -1,8 +1,8 @@
 import { notification } from "antd";
 
-export const openNotification = () => {
+export const openNotification = (message: string) => {
     notification.open({
-      message: 'Set Beneficiaries Success',
+      message,
       description:''
     });
   };
