@@ -1,3 +1,5 @@
+import { u128 } from "@polkadot/types";
+
 export interface InjectedAccount {
     address: string;
     genesisHash?: string | null;
