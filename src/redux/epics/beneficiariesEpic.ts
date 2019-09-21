@@ -8,6 +8,7 @@ import { AccountId } from '@polkadot/types/interfaces';
 import { u64 } from '@polkadot/types';
 import { State } from '../../types/state';
 import { Codec } from '@polkadot/types/types';
+import { openNotification } from '../../components/common';
 
 export type BeneficiaryValue = {
   address: string,
@@ -48,6 +49,7 @@ const beneficiariesEpic = (
                   }
               } of events) {
                   if (method === 'BeneficiariesSet') {
+                    openNotification();
                       // return of(push('/grantorhome')) // TODO: jump to grantorhome
                     return of({
                       type: actions.FETCH_BENEFICIARIES
