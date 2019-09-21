@@ -23,7 +23,7 @@ class SideMenu extends React.Component {
         collapsed={this.state.collapsed}
         onCollapse={this.onCollapse}
       >
-        <Logo>Foss</Logo>
+        <Logo>FOSS</Logo>
         <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
           <Menu.Item key='1'>
             <Link to='/'>

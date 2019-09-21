@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import 'antd/dist/antd.css';
 import { InjectedAccount } from '../../types/type';
 import { Icon, Button } from 'antd';
-import Wrapper from '../../components/Wrapper/index';
+import Wrapper from '../Wrapper/index';
 import styled from 'styled-components';
 import { Input, InputNumber } from 'antd';
+import { BeneficiaryValue } from '../../redux/epics/beneficiariesEpic';
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -40,15 +41,16 @@ const BeneficiaryWeight = styled.div`
 type Props = {
   accounts: InjectedAccount[];
   mainAccount: InjectedAccount;
+  updateBeneficiaries: (beneficiaries: BeneficiaryValue[]) => void;
 };
 
 const BeneficiariesPage: React.FunctionComponent<Props> = props => {
   const [beneficiaryAmount, setbeneficiaryAmount] = useState(1);
   const [beneficiaries, setBeneficiaires] = useState([
-    { beneficiary: '', weight: 1 }
+    { address: '', weight: 1 }
   ]);
 
-  console.log('beneficiaries', beneficiaries);
+  const { updateBeneficiaries } = props;
 
   const getBeneficiaryComponent = (number: number) => {
     let beneficiaryComponent = [];
@@ -65,7 +67,7 @@ const BeneficiariesPage: React.FunctionComponent<Props> = props => {
               style={{ width: '50%' }}
               onChange={e => {
                 const value = {
-                  beneficiary: e.target.value,
+                  address: e.target.value,
                   weight: (beneficiaries[i] && beneficiaries[i].weight) || 1
                 };
                 setBeneficiaires(sortedBeneficiaries.concat(value));
@@ -80,8 +82,7 @@ const BeneficiariesPage: React.FunctionComponent<Props> = props => {
               defaultValue={1}
               onChange={value => {
                 const result = {
-                  beneficiary:
-                    (beneficiaries[i] && beneficiaries[i].beneficiary) || '',
+                  address: (beneficiaries[i] && beneficiaries[i].address) || '',
                   weight: value || 1
                 };
                 setBeneficiaires(sortedBeneficiaries.concat(result));
@@ -120,7 +121,7 @@ const BeneficiariesPage: React.FunctionComponent<Props> = props => {
           marginTop: '2rem'
         }}
         // TODO: This is the final value we need to send back to runtimemodule
-        onClick={() => console.log('Click', beneficiaries)}
+        onClick={() => updateBeneficiaries(beneficiaries)}
       >
         Confirm
       </Button>

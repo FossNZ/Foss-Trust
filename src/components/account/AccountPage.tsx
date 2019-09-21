@@ -1,4 +1,4 @@
-import React, { PureComponent, useState } from 'react';
+import React from 'react';
 import 'antd/dist/antd.css';
 import { Container, AccountInfo, Text } from './style';
 import { InjectedAccount } from '../../types/type';
@@ -7,14 +7,11 @@ import { Icon, Menu, Dropdown } from 'antd';
 type Props = {
   accounts: InjectedAccount[];
   mainAccount: InjectedAccount;
+  setMainAccount: (account: InjectedAccount) => void;
 };
 
 const AccountPage: React.FunctionComponent<Props> = props => {
-  const [
-    selectedAccount,
-    setSelectedAccount
-  ] = useState<InjectedAccount | null>(null);
-  const { accounts, mainAccount } = props as Props;
+  const { accounts, mainAccount, setMainAccount } = props as Props;
   const accountAmount = accounts.length;
 
   if (accountAmount < 1) {
@@ -28,7 +25,7 @@ const AccountPage: React.FunctionComponent<Props> = props => {
 
   const menuItems = accounts.map((account, i) => {
     return (
-      <Menu.Item key={i} onClick={() => setSelectedAccount(accounts[i])}>
+      <Menu.Item key={i} onClick={() => {setMainAccount(accounts[i]);}}>
         {account.name}
       </Menu.Item>
     );
@@ -36,7 +33,7 @@ const AccountPage: React.FunctionComponent<Props> = props => {
 
   const menu = <Menu>{menuItems}</Menu>;
 
-  const displayAccount = mainAccount || selectedAccount || accounts[0];
+  const displayAccount = mainAccount || accounts[0];
 
   return (
     <Container>

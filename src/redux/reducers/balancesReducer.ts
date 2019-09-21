@@ -1,20 +1,17 @@
 import { AnyAction } from "redux";
 import actions from "../actions";
 
-const initialState  = {
-    ETH: 0,
-    BTC: 0,
-    DOT: 0,
-    EOS: 0
-};
+const initialState  = {};
 
-const accountsReducer = (state = initialState, action: AnyAction ) => {
+const BalancesReducer = (state = initialState, action: AnyAction ) => {
     switch (action.type) {
-        case actions.SET_ACCOUNTS:
-            return action.payload;
+        case actions.SET_BALANCE: {
+            const {payload: {id, balance}} = action;
+            return {...state, [id]: balance};
+        }
         default:
             return state;
     }
 }
 
-export default accountsReducer;
+export default BalancesReducer;
