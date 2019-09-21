@@ -28,6 +28,18 @@ const setAccountBeneficiariesEpic = (
       })
     );
 
+const setAccountConditionEpic = (
+  action$: ActionsObservable<AnyAction>
+): Observable<AnyAction> =>
+  action$.pipe(
+    ofType(actions.SET_MAIN_ACCOUNT),
+    map(() => {
+      return {
+        type: actions.FETCH_CONDITION
+      }
+    })
+  );
+
 const setAccountsEpic = (
   action$: ActionsObservable<AnyAction>,
 ): Observable<AnyAction> =>
@@ -41,4 +53,4 @@ const setAccountsEpic = (
     })
   );
 
-export default combineEpics(setAccountBalancesEpic, setAccountBeneficiariesEpic, setAccountsEpic);
+export default combineEpics(setAccountBalancesEpic, setAccountBeneficiariesEpic, setAccountsEpic, setAccountConditionEpic);

@@ -4,11 +4,11 @@ import { switchMap, withLatestFrom, map } from 'rxjs/operators';
 import { Observable, combineLatest, of, EMPTY } from 'rxjs';
 import actions from '../actions';
 import { EpicDependencies } from '../store';
-import { push } from 'react-router-redux';
 import { AccountId } from '@polkadot/types/interfaces';
 import { u64 } from '@polkadot/types';
 import { State } from '../../types/state';
 import { Codec } from '@polkadot/types/types';
+import { openNotification } from '../../components/common';
 
 export type BeneficiaryValue = {
   address: string,
@@ -45,12 +45,11 @@ const beneficiariesEpic = (
       if (status.isFinalized) {
           for (const {
                   event: {
-                      method,
-                      data
+                      method
                   }
               } of events) {
-                  console.log('ssss')
                   if (method === 'BeneficiariesSet') {
+                    openNotification('Set Beneficiaries Success');
                       // return of(push('/grantorhome')) // TODO: jump to grantorhome
                     return of({
                       type: actions.FETCH_BENEFICIARIES

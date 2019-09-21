@@ -6,6 +6,7 @@ import Wrapper from '../../components/Wrapper/index';
 import AccountPage from '../../components/account/AccountPage';
 import { u128 } from '@polkadot/types';
 import { Beneficiary } from '../../redux/epics/beneficiariesEpic';
+import BN from 'bn.js';
 
 type Props = {
   accounts: InjectedAccount[];
@@ -27,6 +28,7 @@ class GrantorHomePage extends React.Component {
 
   render() {
     const { accounts, mainAccount, balances, setMainAccount, beneficiaries } = this.props as Props;
+    const totalWeight = beneficiaries.reduce((acc, beneficiary) => acc.add(beneficiary.weight), new BN(0));
 
     return (
       <Wrapper>
@@ -53,7 +55,7 @@ class GrantorHomePage extends React.Component {
           <div>
             USTD: {balances[3] ? balances[3].toString() : 0}
           </div>
-          {beneficiaries.map(beneficiary => <div>{beneficiary.address.toString()} : {beneficiary.weight.toString()}</div>)}
+          {beneficiaries.map(beneficiary => <div>{beneficiary.address.toString()} : {beneficiary.weight.muln(100).div(totalWeight).toString()}%</div>)}
         </div>
       </Wrapper>
     );
