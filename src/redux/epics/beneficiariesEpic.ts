@@ -4,7 +4,6 @@ import { switchMap, withLatestFrom, map } from 'rxjs/operators';
 import { Observable, combineLatest, of, EMPTY } from 'rxjs';
 import actions from '../actions';
 import { EpicDependencies } from '../store';
-import { push } from 'react-router-redux';
 import { AccountId } from '@polkadot/types/interfaces';
 import { u64 } from '@polkadot/types';
 import { State } from '../../types/state';
@@ -45,11 +44,9 @@ const beneficiariesEpic = (
       if (status.isFinalized) {
           for (const {
                   event: {
-                      method,
-                      data
+                      method
                   }
               } of events) {
-                  console.log('ssss')
                   if (method === 'BeneficiariesSet') {
                       // return of(push('/grantorhome')) // TODO: jump to grantorhome
                     return of({
