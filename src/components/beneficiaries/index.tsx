@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'antd/dist/antd.css';
 import { InjectedAccount } from '../../types/type';
-import { Icon, Menu, Dropdown } from 'antd';
+import { Icon, Button } from 'antd';
 import Wrapper from '../../components/Wrapper/index';
 import styled from 'styled-components';
 import { Input, InputNumber } from 'antd';
+import { Formik } from 'formik';
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -42,38 +43,58 @@ type Props = {
   mainAccount: InjectedAccount;
 };
 
-const getBeneficiaryComponent = (number: number) => {
-  let beneficiaryComponent = [];
-  for (let i = 0; i < number; i++) {
-    beneficiaryComponent.push(
-      <BeneficiaryWrapper key={i}>
-        <BeneficiaryAddress>
-          <BeneficiaryTitle>Beneficiary:</BeneficiaryTitle>
-          <Input
-            placeholder='Enter beneficiary account'
-            onChange={value => console.log(value)}
-            style={{ width: '50%' }}
-          />
-        </BeneficiaryAddress>
-        <BeneficiaryWeight>
-          <BeneficiaryTitle>Weight:</BeneficiaryTitle>
-          <InputNumber
-            min={1}
-            max={10}
-            defaultValue={1}
-            onChange={value => console.log(value)}
-          />
-        </BeneficiaryWeight>
-      </BeneficiaryWrapper>
-    );
-  }
-
-  return beneficiaryComponent;
-};
-
 const BeneficiariesPage: React.FunctionComponent<Props> = props => {
-  const [beneficiaries, setBeneficiaires] = useState([]);
   const [beneficiaryAmount, setbeneficiaryAmount] = useState(1);
+  const [beneficiaries, setBeneficiaires] = useState([
+    { beneficiary: '', weight: 1 }
+  ]);
+
+  console.log('beneficiaries', beneficiaries);
+
+  const getBeneficiaryComponent = (number: number) => {
+    let beneficiaryComponent = [];
+    for (let i = 0; i < number; i++) {
+      let sortedBeneficiaries = beneficiaries.filter(
+        (value, index) => index !== i
+      );
+      beneficiaryComponent.push(
+        <BeneficiaryWrapper key={i}>
+          <BeneficiaryAddress>
+            <BeneficiaryTitle>Beneficiary:</BeneficiaryTitle>
+            <Input
+              placeholder='Enter beneficiary account'
+              style={{ width: '50%' }}
+              onChange={e => {
+                const value = {
+                  beneficiary: e.target.value,
+                  weight: (beneficiaries[i] && beneficiaries[i].weight) || 1
+                };
+                setBeneficiaires(sortedBeneficiaries.concat(value));
+              }}
+            />
+          </BeneficiaryAddress>
+          <BeneficiaryWeight>
+            <BeneficiaryTitle>Weight:</BeneficiaryTitle>
+            <InputNumber
+              min={1}
+              max={10}
+              defaultValue={1}
+              onChange={value => {
+                const result = {
+                  beneficiary:
+                    (beneficiaries[i] && beneficiaries[i].beneficiary) || '',
+                  weight: value || 1
+                };
+                setBeneficiaires(sortedBeneficiaries.concat(result));
+              }}
+            />
+          </BeneficiaryWeight>
+        </BeneficiaryWrapper>
+      );
+    }
+
+    return beneficiaryComponent;
+  };
 
   return (
     <Wrapper>
@@ -93,6 +114,17 @@ const BeneficiariesPage: React.FunctionComponent<Props> = props => {
         )}
       </TitleWrapper>
       {getBeneficiaryComponent(beneficiaryAmount)}
+      <Button
+        type='primary'
+        style={{
+          marginLeft: '6rem',
+          marginTop: '2rem'
+        }}
+        // TODO: This is the final value we need to send back to runtimemodule
+        onClick={() => console.log('Click', beneficiaries)}
+      >
+        Confirm
+      </Button>
     </Wrapper>
   );
 };
