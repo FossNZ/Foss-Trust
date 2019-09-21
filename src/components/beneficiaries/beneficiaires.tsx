@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import 'antd/dist/antd.css';
 import { InjectedAccount } from '../../types/type';
 import { Icon, Button } from 'antd';
-import Wrapper from '../../components/Wrapper/index';
+import Wrapper from '../Wrapper/index';
 import styled from 'styled-components';
 import { Input, InputNumber } from 'antd';
-import { Formik } from 'formik';
+import { Beneficiarie } from '../../redux/epics/beneficiariesEpic';
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -41,6 +41,7 @@ const BeneficiaryWeight = styled.div`
 type Props = {
   accounts: InjectedAccount[];
   mainAccount: InjectedAccount;
+  updateBeneficiaries: (beneficiaries: Beneficiarie[]) => void;
 };
 
 const BeneficiariesPage: React.FunctionComponent<Props> = props => {
@@ -49,7 +50,7 @@ const BeneficiariesPage: React.FunctionComponent<Props> = props => {
     { beneficiary: '', weight: 1 }
   ]);
 
-  console.log('beneficiaries', beneficiaries);
+  const { updateBeneficiaries } = props;
 
   const getBeneficiaryComponent = (number: number) => {
     let beneficiaryComponent = [];
@@ -121,7 +122,7 @@ const BeneficiariesPage: React.FunctionComponent<Props> = props => {
           marginTop: '2rem'
         }}
         // TODO: This is the final value we need to send back to runtimemodule
-        onClick={() => console.log('Click', beneficiaries)}
+        onClick={() => updateBeneficiaries(beneficiaries)}
       >
         Confirm
       </Button>
