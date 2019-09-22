@@ -31,6 +31,7 @@ type Props = {
   setMainAccount: (account: InjectedAccount) => void;
   withDraw: (assetID: number) => void;
   location: any;
+  grantor: string;
 };
 
 class BeneficiaryHomePage extends React.Component {
@@ -52,7 +53,8 @@ class BeneficiaryHomePage extends React.Component {
       beneficiaries,
       location,
       grantorBalances,
-      withDraw
+      withDraw,
+      grantor
     } = this.props as Props;
 
     const totalWeight =
@@ -96,6 +98,9 @@ class BeneficiaryHomePage extends React.Component {
               </div>
             )}
             <br />
+            <br />
+            <BalanceTitle>Grantor Address:</BalanceTitle>
+            <div>{grantor ? grantor : ''}</div>
             <br />
             <BalanceTitle>Grantor balances</BalanceTitle>
             <div>
