@@ -7,6 +7,20 @@ import AccountPage from '../../components/account/AccountPage';
 import { u128 } from '@polkadot/types';
 import { Beneficiary } from '../../redux/epics/beneficiariesEpic';
 import BN from 'bn.js';
+import styled from 'styled-components';
+
+const BalanceTitle = styled.h3`
+  display: inline-block;
+`;
+
+const BalanceContainer = styled.div`
+  padding: 24px;
+`;
+
+const BalanceInfo = styled.div`
+  width: 4rem;
+  display: inline-block;
+`;
 
 type Props = {
   accounts: InjectedAccount[];
@@ -60,31 +74,49 @@ class BeneficiaryHomePage extends React.Component {
             mainAccount={mainAccount}
             setMainAccount={setMainAccount}
           />
-          {balances && (
+          <BalanceContainer>
+            {balances && (
+              <div>
+                <div>
+                  <BalanceInfo>BTC:</BalanceInfo>
+                  {balances[0] ? balances[0].toString() : 0}
+                </div>
+                <div>
+                  <BalanceInfo>ETH: </BalanceInfo>
+                  {balances[1] ? balances[1].toString() : 0}
+                </div>
+                <div>
+                  <BalanceInfo>DAI: </BalanceInfo>
+                  {balances[2] ? balances[2].toString() : 0}
+                </div>
+                <div>
+                  <BalanceInfo>USTD: </BalanceInfo>
+                  {balances[3] ? balances[3].toString() : 0}
+                </div>
+              </div>
+            )}
+            <br />
+            <br />
+            <BalanceTitle>Grantor balances</BalanceTitle>
             <div>
-              <div>BTC: {balances[0] ? balances[0].toString() : 0}</div>
-              <div>ETH: {balances[1] ? balances[1].toString() : 0}</div>
-              <div>DAI: {balances[2] ? balances[2].toString() : 0}</div>
-              <div>USTD: {balances[3] ? balances[3].toString() : 0}</div>
+              <BalanceInfo>BTC:</BalanceInfo>
+              {grantorBalances[0] ? grantorBalances[0].toString() : 0}
             </div>
-          )}
-          <br/>
-          <br/>
-          <div>Grantor balances</div>
-          <div>
-            BTC: {grantorBalances[0] ? grantorBalances[0].toString() : 0}
-          </div>
-          <div>
-            ETH: {grantorBalances[1] ? grantorBalances[1].toString() : 0}
-          </div>
-          <div>
-            DAI: {grantorBalances[2] ? grantorBalances[2].toString() : 0}
-          </div>
-          <div>
-            USTD: {grantorBalances[3] ? grantorBalances[3].toString() : 0}
-          </div>
-          <br/>
-          <br/>
+            <div>
+              <BalanceInfo>ETH: </BalanceInfo>
+              {grantorBalances[1] ? grantorBalances[1].toString() : 0}
+            </div>
+            <div>
+              <BalanceInfo>DAI: </BalanceInfo>
+              {grantorBalances[2] ? grantorBalances[2].toString() : 0}
+            </div>
+            <div>
+              <BalanceInfo>USTD: </BalanceInfo>
+              {grantorBalances[3] ? grantorBalances[3].toString() : 0}
+            </div>
+          </BalanceContainer>
+          <br />
+          <br />
           <Button
             type='primary'
             style={{
@@ -92,7 +124,9 @@ class BeneficiaryHomePage extends React.Component {
               marginTop: '2rem'
             }}
             onClick={() => withDraw(0)}
-          >WithDraw BTC</Button>
+          >
+            WithDraw BTC
+          </Button>
           <Button
             type='primary'
             style={{
@@ -100,7 +134,9 @@ class BeneficiaryHomePage extends React.Component {
               marginTop: '2rem'
             }}
             onClick={() => withDraw(1)}
-          >WithDraw ETH</Button>
+          >
+            WithDraw ETH
+          </Button>
           <Button
             type='primary'
             style={{
@@ -108,7 +144,9 @@ class BeneficiaryHomePage extends React.Component {
               marginTop: '2rem'
             }}
             onClick={() => withDraw(2)}
-          >WithDraw DAI</Button>
+          >
+            WithDraw DAI
+          </Button>
           <Button
             type='primary'
             style={{
@@ -116,7 +154,9 @@ class BeneficiaryHomePage extends React.Component {
               marginTop: '2rem'
             }}
             onClick={() => withDraw(3)}
-          >WithDraw USDT</Button>
+          >
+            WithDraw USDT
+          </Button>
         </div>
       </Wrapper>
     );
