@@ -58,8 +58,8 @@ class SideMenu extends React.Component {
         >
           <Menu.Item key='0'>
             <Link to='/grantorhome'>
-              <Icon type='team' />
-              <span>Account</span>
+              <Icon type='home' />
+              <span>Summary</span>
             </Link>
           </Menu.Item>
           <Menu.Item key='1'>
