@@ -82,8 +82,7 @@ const BeneficiariesPage: React.FunctionComponent<Props> = props => {
               defaultValue={1}
               onChange={value => {
                 const result = {
-                  address:
-                    (beneficiaries[i] && beneficiaries[i].address) || '',
+                  address: (beneficiaries[i] && beneficiaries[i].address) || '',
                   weight: value || 1
                 };
                 setBeneficiaires(sortedBeneficiaries.concat(result));
