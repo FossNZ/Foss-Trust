@@ -95,6 +95,10 @@ class GrantorHomePage extends React.Component {
               </div>
             </div>
           </BalanceContainer>
+          <BalanceContainer>
+          <br />
+          <BalanceTitle>Beneficiaries:</BalanceTitle>
+          <br />
           {beneficiaries.map(beneficiary => (
             <div>
               {beneficiary.address.toString()} :{' '}
@@ -105,9 +109,11 @@ class GrantorHomePage extends React.Component {
               %
             </div>
           ))}
+          </BalanceContainer>
           <BalanceContainer>
-            Conditions:
-            {condition && condition !== {} ? condition.toString() : ''}
+          <BalanceTitle>Conditions:</BalanceTitle>
+          <br />
+          {condition && condition !== {} ? condition.toString() : ''}
           </BalanceContainer>
         </div>
       </Wrapper>

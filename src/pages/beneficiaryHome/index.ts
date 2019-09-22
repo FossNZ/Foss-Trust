@@ -12,7 +12,8 @@ const mapStateToProps = ({
   beneficiaries,
   grantorBalances,
   grantor,
-  grantorBeneficiaries
+  grantorBeneficiaries,
+  grantorCondition
 }: State) => ({
   accounts,
   mainAccount,
@@ -20,7 +21,8 @@ const mapStateToProps = ({
   beneficiaries,
   grantorBalances,
   grantor,
-  grantorBeneficiaries
+  grantorBeneficiaries,
+  grantorCondition
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
