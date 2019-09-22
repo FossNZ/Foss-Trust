@@ -19,6 +19,8 @@ const initSignerEpic = (
             ([api]) => 
                 from((window as any).injectedWeb3['polkadot-js'].enable()).pipe(
                     switchMap((polkadotExt: any) => {
+                        console.log(api);
+                        (window as any).api = api;
                         api.setSigner(polkadotExt.signer);
                         return from<Promise<InjectedAccount[]>>(new Promise((resolve)=> polkadotExt.accounts.subscribe(resolve)));
                     }),

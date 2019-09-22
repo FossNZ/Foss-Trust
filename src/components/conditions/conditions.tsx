@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import 'antd/dist/antd.css';
-import { InjectedAccount } from '../../types/type';
-import Wrapper from '../../components/Wrapper/index';
+import { InjectedAccount, ConditionType } from '../../types/type';
+import Wrapper from '../Wrapper/index';
 import styled from 'styled-components';
-import { Icon, Input, InputNumber, Button, DatePicker } from 'antd';
+import { InputNumber, Button, DatePicker } from 'antd';
+import { Condition } from '../../redux/epics/conditionEpic';
 
 const Title = styled.div`
   font-size: 1.5rem;
@@ -20,11 +21,12 @@ const Buttonrapper = styled.div`
 `;
 
 type Props = {
-  accounts: InjectedAccount[];
-  mainAccount: InjectedAccount;
+  updateCondition: (condition: Condition) => void;
 };
 
 const ConditionsPage: React.FunctionComponent<Props> = props => {
+  const { updateCondition } = props;
+
   const [startBlock, setStartBlock] = useState(1);
   const [startTime, setStartTime] = useState();
   const [checkinBlock, setCheckinBlock] = useState(1);
@@ -46,8 +48,7 @@ const ConditionsPage: React.FunctionComponent<Props> = props => {
         <Buttonrapper>
           <Button
             type='primary'
-            // TODO: This is the final value we need to send back to runtimemodule
-            onClick={() => console.log('Click', startBlock)}
+            onClick={() => updateCondition({value: startBlock, typeId: ConditionType.BlockHeight})}
           >
             Confirm
           </Button>

@@ -6,5 +6,6 @@ export type State = {
     accounts: InjectedAccount[],
     mainAccount: InjectedAccount,
     balances: u128[],
-    beneficiaries: Beneficiary[]
+    beneficiaries: Beneficiary[],
+    condition: any
 };
