@@ -16,7 +16,7 @@ const setAccountBalancesEpic = (
     })
   );
 
-const setAccountGrantorBalancesEpic = (
+const setGrantorBalancesEpic = (
     action$: ActionsObservable<AnyAction>
   ): Observable<AnyAction> =>
     action$.pipe(
@@ -39,6 +39,18 @@ const setAccountBeneficiariesEpic = (
         }
       })
     );
+
+const setGrantorBeneficiariesEpic = (
+      action$: ActionsObservable<AnyAction>
+    ): Observable<AnyAction> =>
+      action$.pipe(
+        ofType(actions.SET_GRANTOR_ADDRESS),
+        map(() => {
+          return {
+            type: actions.FETCH_GRANTOR_BENEFICIARIES
+          }
+        })
+      );
 
 const setAccountConditionEpic = (
   action$: ActionsObservable<AnyAction>
@@ -65,4 +77,4 @@ const setAccountsEpic = (
     })
   );
 
-export default combineEpics(setAccountBalancesEpic, setAccountBeneficiariesEpic, setAccountsEpic, setAccountConditionEpic, setAccountGrantorBalancesEpic);
+export default combineEpics(setAccountBalancesEpic, setAccountBeneficiariesEpic, setAccountsEpic, setAccountConditionEpic, setGrantorBalancesEpic, setGrantorBeneficiariesEpic);

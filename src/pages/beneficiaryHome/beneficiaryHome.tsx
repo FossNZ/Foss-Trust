@@ -32,11 +32,12 @@ type Props = {
   withDraw: (assetID: number) => void;
   location: any;
   grantor: string;
+  grantorBeneficiaries: Beneficiary[];
 };
 
 class BeneficiaryHomePage extends React.Component {
   state = {
-    collapsed: false
+    collapsed: false,
   };
 
   onCollapse = (collapsed: any) => {
@@ -54,12 +55,13 @@ class BeneficiaryHomePage extends React.Component {
       location,
       grantorBalances,
       withDraw,
-      grantor
+      grantor,
+      grantorBeneficiaries
     } = this.props as Props;
 
     const totalWeight =
-      beneficiaries &&
-      beneficiaries.reduce(
+      grantorBeneficiaries &&
+      grantorBeneficiaries.reduce(
         (acc, beneficiary) => acc.add(beneficiary.weight),
         new BN(0)
       );
@@ -121,6 +123,19 @@ class BeneficiaryHomePage extends React.Component {
             </div>
           </BalanceContainer>
           <br />
+          <br />
+          <BalanceTitle>Grantor Beneficiaries:</BalanceTitle>
+          <br />
+          {grantorBeneficiaries.map(beneficiary => (
+            <div>
+              {beneficiary.address.toString()} :{' '}
+              {beneficiary.weight
+                .muln(100)
+                .div(totalWeight)
+                .toString()}
+              %
+            </div>
+          ))}
           <br />
           <Button
             type='primary'

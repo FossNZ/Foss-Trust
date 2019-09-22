@@ -6,6 +6,7 @@ import beneficiariesEpic from './beneficiariesEpic';
 import conditionEpic from './conditionEpic';
 import grantorBalanceEpic from './grantorBalanceEpic';
 import withDrawEpic from './withDrawEpic';
+import grantorBeneficiariesEpic from './grantorBeneficiariesEpic';
 
 const epics: any[] = [
     accountEpic,
@@ -14,7 +15,8 @@ const epics: any[] = [
     beneficiariesEpic,
     conditionEpic,
     grantorBalanceEpic,
-    withDrawEpic
+    withDrawEpic,
+    grantorBeneficiariesEpic
 ]
 
 const rootEpics = (...args: any[]) => combineEpics(...epics)(...args);

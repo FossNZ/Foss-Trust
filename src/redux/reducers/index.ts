@@ -6,6 +6,7 @@ import beneficiaries from './beneficiariesReducer';
 import condition from './conditionReducer';
 import grantor from './grantorReducer';
 import grantorBalances from './grantorBalancesReducer';
+import grantorBeneficiaries from './grantorBeneficiariesReducer';
 
 const reducers = combineReducers({
     accounts,
@@ -14,7 +15,8 @@ const reducers = combineReducers({
     beneficiaries,
     condition,
     grantor,
-    grantorBalances
+    grantorBalances,
+    grantorBeneficiaries
 })
 
 export default reducers;

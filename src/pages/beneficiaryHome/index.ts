@@ -11,14 +11,16 @@ const mapStateToProps = ({
   balances,
   beneficiaries,
   grantorBalances,
-  grantor
+  grantor,
+  grantorBeneficiaries
 }: State) => ({
   accounts,
   mainAccount,
   balances,
   beneficiaries,
   grantorBalances,
-  grantor
+  grantor,
+  grantorBeneficiaries
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
