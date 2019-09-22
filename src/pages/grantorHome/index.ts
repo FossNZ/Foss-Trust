@@ -5,11 +5,12 @@ import { Dispatch } from 'redux';
 import { InjectedAccount } from '../../types/type';
 import actions from '../../redux/actions';
 
-const mapStateToProps = ({ accounts, mainAccount, balances, beneficiaries }: State) => ({
+const mapStateToProps = ({ accounts, mainAccount, balances, beneficiaries, condition }: State) => ({
   accounts,
   mainAccount,
   balances,
-  beneficiaries
+  beneficiaries,
+  condition
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

@@ -13,6 +13,8 @@ type Props = {
   mainAccount: InjectedAccount;
   balances: u128[];
   beneficiaries: Beneficiary[];
+  condition: any;
+
   setMainAccount: (account: InjectedAccount) => void;
   location: any;
 };
@@ -28,21 +30,8 @@ class GrantorHomePage extends React.Component {
   };
 
   render() {
-    const {
-      accounts,
-      mainAccount,
-      balances,
-      setMainAccount,
-      beneficiaries,
-      location
-    } = this.props as Props;
-
-    const totalWeight = beneficiaries.reduce(
-      (acc, beneficiary) => acc.add(beneficiary.weight),
-      new BN(0)
-    );
-
-    console.log('location', location);
+    const { accounts, mainAccount, balances, setMainAccount, beneficiaries, condition, location } = this.props as Props;
+    const totalWeight = beneficiaries.reduce((acc, beneficiary) => acc.add(beneficiary.weight), new BN(0));
 
     return (
       <Wrapper>
@@ -57,20 +46,20 @@ class GrantorHomePage extends React.Component {
             mainAccount={mainAccount}
             setMainAccount={setMainAccount}
           />
-          <div>BTC: {balances[0] ? balances[0].toString() : 0}</div>
-          <div>ETH: {balances[1] ? balances[1].toString() : 0}</div>
-          <div>DAI: {balances[2] ? balances[2].toString() : 0}</div>
-          <div>USTD: {balances[3] ? balances[3].toString() : 0}</div>
-          {beneficiaries.map(beneficiary => (
-            <div>
-              {beneficiary.address.toString()} :{' '}
-              {beneficiary.weight
-                .muln(100)
-                .div(totalWeight)
-                .toString()}
-              %
-            </div>
-          ))}
+          <div>
+            BTC: {balances[0] ? balances[0].toString() : 0}
+          </div>
+          <div>
+            ETH: {balances[1] ? balances[1].toString() : 0}
+          </div>
+          <div>
+            DAI: {balances[2] ? balances[2].toString() : 0}
+          </div>
+          <div>
+            USTD: {balances[3] ? balances[3].toString() : 0}
+          </div>
+          {beneficiaries.map(beneficiary => <div>{beneficiary.address.toString()} : {beneficiary.weight.muln(100).div(totalWeight).toString()}%</div>)}
+          {(condition && condition !== {}) ? condition.toString() : ''}
         </div>
       </Wrapper>
     );
