@@ -5,6 +5,22 @@ import { Icon, Input } from 'antd';
 import Particles from 'react-particles-js';
 import { History } from 'history';
 
+const Title = styled.div`
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  cursor: pointer;
+  color: white;
+  font-weight: 500;
+  font-size: 5rem;
+  height: 2.5rem;
+  font-style: italic;
+
+  &:hover {
+    color: white;
+  }
+`;
+
 const HomeWrapper = styled.div`
   display: flex;
 `;
@@ -21,7 +37,7 @@ const BeneficiaryWrapper = styled.div`
 
 const RoleSection = styled.div`
   position: absolute;
-  top: 30%;
+  top: 40%;
   left: 25%;
   cursor: pointer;
   color: #ffffff8c;
@@ -78,10 +94,10 @@ const HomePage: React.FunctionComponent<Props> = props => {
   const [grantorAddress, setGrantorAddress] = useState<string | null>(null);
   const { updateGrantorAddress } = props;
 
-
   return (
     <HomeWrapper>
       <GrantorWrapper>
+        <Title>F.O.S.S TRUST</Title>
         {getBgParticles(
           'linear-gradient(122deg, rgba(28,8,36,1) 5%, rgba(68,9,121,1) 26%, rgba(69,130,196,1) 95%)'
         )}
