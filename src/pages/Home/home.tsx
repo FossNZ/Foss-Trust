@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import 'antd/dist/antd.css';
-import { InjectedAccount } from '../../types/type';
 import styled from 'styled-components';
 import { Icon, Input } from 'antd';
 import Particles from 'react-particles-js';
@@ -70,14 +69,16 @@ const getBgParticles = (background: string) => (
 );
 
 type Props = {
-  accounts: InjectedAccount[];
-  mainAccount: InjectedAccount;
+  updateGrantorAddress: (grantorAddress: string) => void;
   history: History;
 };
 
 const HomePage: React.FunctionComponent<Props> = props => {
   const [showInput, setShowInput] = useState(false);
   const [grantorAddress, setGrantorAddress] = useState<string | null>(null);
+  const {updateGrantorAddress} = props;
+
+  console.log('props',props)
 
   return (
     <HomeWrapper>
@@ -107,8 +108,9 @@ const HomePage: React.FunctionComponent<Props> = props => {
                 placeholder='Enter grantor address..'
                 style={{ width: '80%', height: '2.5rem', opacity: 0.9 }}
                 onChange={e => {
-                  setGrantorAddress(e.target.value);
-                }}
+                  updateGrantorAddress(e.target.value);
+                }
+                }
               />
             )}
             {grantorAddress && (
