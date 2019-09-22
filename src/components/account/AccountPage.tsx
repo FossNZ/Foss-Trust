@@ -12,9 +12,9 @@ type Props = {
 
 const AccountPage: React.FunctionComponent<Props> = props => {
   const { accounts, mainAccount, setMainAccount } = props as Props;
-  const accountAmount = accounts.length;
+  const accountAmount = accounts && accounts.length;
 
-  if (accountAmount < 1) {
+  if (accountAmount < 1 || !accounts) {
     return (
       <Container>
         <Text>You don't have an account.</Text>
@@ -23,18 +23,20 @@ const AccountPage: React.FunctionComponent<Props> = props => {
     );
   }
 
-  const menuItems = accounts.map((account, i) => {
-    return (
-      <Menu.Item
-        key={i}
-        onClick={() => {
-          setMainAccount(accounts[i]);
-        }}
-      >
-        {account.name}
-      </Menu.Item>
-    );
-  });
+  const menuItems =
+    accounts &&
+    accounts.map((account, i) => {
+      return (
+        <Menu.Item
+          key={i}
+          onClick={() => {
+            setMainAccount(accounts[i]);
+          }}
+        >
+          {account.name}
+        </Menu.Item>
+      );
+    });
 
   const menu = <Menu>{menuItems}</Menu>;
 
