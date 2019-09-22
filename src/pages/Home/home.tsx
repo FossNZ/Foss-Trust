@@ -76,9 +76,8 @@ type Props = {
 const HomePage: React.FunctionComponent<Props> = props => {
   const [showInput, setShowInput] = useState(false);
   const [grantorAddress, setGrantorAddress] = useState<string | null>(null);
-  const {updateGrantorAddress} = props;
+  const { updateGrantorAddress } = props;
 
-  console.log('props',props)
 
   return (
     <HomeWrapper>
@@ -108,15 +107,15 @@ const HomePage: React.FunctionComponent<Props> = props => {
                 placeholder='Enter grantor address..'
                 style={{ width: '80%', height: '2.5rem', opacity: 0.9 }}
                 onChange={e => {
-                  updateGrantorAddress(e.target.value);
-                }
-                }
+                  setGrantorAddress(e.target.value);
+                }}
               />
             )}
             {grantorAddress && (
               <Icon
                 type='swap-right'
                 onClick={() => {
+                  updateGrantorAddress(grantorAddress);
                   props.history.push('./beneficiaryhome');
                 }}
               />

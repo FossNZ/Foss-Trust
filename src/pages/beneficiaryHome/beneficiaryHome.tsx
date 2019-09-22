@@ -44,9 +44,6 @@ class BeneficiaryHomePage extends React.Component {
         new BN(0)
       );
 
-    console.log('location', location);
-    console.log('accounts', accounts);
-
     return (
       <Wrapper>
         <div>

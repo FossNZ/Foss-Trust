@@ -5,8 +5,8 @@ import GrantorHomePage from './pages/grantorHome';
 import store from './redux/store';
 import BeneficiariesPage from './components/beneficiaries/index';
 import ConditionsPage from './components/conditions/index';
-import HomePage from './pages/Home/home';
-import BeneficiaryHome from './pages/beneficiaryHome/beneficiaryHome';
+import HomePage from './pages/Home';
+import BeneficiaryHome from './pages/beneficiaryHome/index';
 
 const App: React.FC = () => {
   return (
