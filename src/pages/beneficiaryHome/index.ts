@@ -25,6 +25,12 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
       type: actions.SET_MAIN_ACCOUNT,
       payload: mainAccount
     });
+  },
+  withDraw: (assetId: number) => {
+    dispatch({
+      type: actions.WITHDRAW,
+      payload: assetId
+    });
   }
 });
 
