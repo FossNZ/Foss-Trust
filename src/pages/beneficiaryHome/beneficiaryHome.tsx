@@ -33,6 +33,7 @@ type Props = {
   location: any;
   grantor: string;
   grantorBeneficiaries: Beneficiary[];
+  grantorCondition: any;
 };
 
 class BeneficiaryHomePage extends React.Component {
@@ -51,12 +52,11 @@ class BeneficiaryHomePage extends React.Component {
       mainAccount,
       balances,
       setMainAccount,
-      beneficiaries,
-      location,
       grantorBalances,
       withDraw,
       grantor,
-      grantorBeneficiaries
+      grantorBeneficiaries,
+      grantorCondition
     } = this.props as Props;
 
     const totalWeight =
@@ -124,6 +124,7 @@ class BeneficiaryHomePage extends React.Component {
           </BalanceContainer>
           <br />
           <br />
+          <BalanceContainer>
           <BalanceTitle>Grantor Beneficiaries:</BalanceTitle>
           <br />
           {grantorBeneficiaries.map(beneficiary => (
@@ -136,7 +137,14 @@ class BeneficiaryHomePage extends React.Component {
               %
             </div>
           ))}
+          </BalanceContainer>
           <br />
+          <BalanceContainer>
+          <BalanceTitle>Grantor Conditions:</BalanceTitle>
+          <br/>
+          {grantorCondition && grantorCondition !== {} ? grantorCondition.toString() : ''}
+          <br />
+          </BalanceContainer>
           <Button
             type='primary'
             style={{
