@@ -6,7 +6,7 @@ import store from './redux/store';
 import BeneficiariesPage from './components/beneficiaries/index';
 import ConditionsPage from './components/conditions/index';
 import HomePage from './pages/Home/home';
-import { history } from './redux/store';
+import BeneficiaryHome from './pages/beneficiaryHome/beneficiaryHome';
 
 const App: React.FC = () => {
   return (
@@ -16,6 +16,7 @@ const App: React.FC = () => {
         <Route exact path='/grantorhome' component={GrantorHomePage} />
         <Route exact path='/beneficiaries' component={BeneficiariesPage} />
         <Route exact path='/conditions' component={ConditionsPage} />
+        <Route exact path='/beneficiaryhome' component={BeneficiaryHome} />
       </Router>
     </Provider>
   );

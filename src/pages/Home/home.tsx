@@ -23,7 +23,7 @@ const BeneficiaryWrapper = styled.div`
 const RoleSection = styled.div`
   position: absolute;
   top: 30%;
-  left: 30%;
+  left: 25%;
   cursor: pointer;
   color: #ffffff8c;
   font-weight: 400;
@@ -105,13 +105,20 @@ const HomePage: React.FunctionComponent<Props> = props => {
             {showInput && (
               <Input
                 placeholder='Enter grantor address..'
-                style={{ width: '80%' }}
+                style={{ width: '80%', height: '2.5rem', opacity: 0.9 }}
                 onChange={e => {
                   setGrantorAddress(e.target.value);
                 }}
               />
             )}
-            {grantorAddress && <Icon type='swap-right' />}
+            {grantorAddress && (
+              <Icon
+                type='swap-right'
+                onClick={() => {
+                  props.history.push('./beneficiaryhome');
+                }}
+              />
+            )}
           </RoleSection>
         }
       </BeneficiaryWrapper>

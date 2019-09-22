@@ -17,6 +17,27 @@ class SideMenu extends React.Component {
   };
 
   render() {
+    const currentLocation = window.location.pathname;
+
+    if (currentLocation === '/beneficiaryhome') {
+      return (
+        <Sider
+          collapsible
+          collapsed={this.state.collapsed}
+          onCollapse={this.onCollapse}
+        >
+          <Logo>FOSS</Logo>
+          <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline'>
+            <Menu.Item key='0'>
+              <Link to='/beneficiaryhome'>
+                <Icon type='team' />
+                <span>Account</span>
+              </Link>
+            </Menu.Item>
+          </Menu>
+        </Sider>
+      );
+    }
     const activeKey = [
       '/grantorhome',
       '/beneficiaries',
