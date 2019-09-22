@@ -2,12 +2,10 @@ import { createEpicMiddleware } from 'redux-observable';
 import { createBrowserHistory, History } from 'history';
 import { ApiRx } from '@polkadot/api';
 import { applyMiddleware, createStore, compose } from 'redux';
-import { composeWithDevTools } from 'remote-redux-devtools';
 import { routerMiddleware } from 'react-router-redux';
 import reducers from './reducers/index';
 import epics from './epics/index';
 import { Observable } from 'rxjs';
-import { InjectedAccount } from '../types/type';
 import actions from './actions';
 
 export const history: History = createBrowserHistory();
@@ -30,6 +28,7 @@ const typeDefs = {
 const api = ApiRx.create({ types: typeDefs });
 
 // const api = ApiRx.create({provider: new WsProvider('wss://poc3-rpc.polkadot.io/')});
+
 
 const epicMiddleware = createEpicMiddleware({
   dependencies: { api$: api }
