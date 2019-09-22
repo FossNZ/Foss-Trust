@@ -45,9 +45,9 @@ const ConditionsPage: React.FunctionComponent<Props> = props => {
           optionFilterProp='children'
           onChange={value => setCondition(value)}
         >
-          <Select.Option value='0'>Start by block</Select.Option>
-          <Select.Option value='1'>Start by time</Select.Option>
-          <Select.Option value='2'>Start by schedule scheckin</Select.Option>
+          <Select.Option value='0'>Switch at block</Select.Option>
+          <Select.Option value='1'>Switch by time</Select.Option>
+          <Select.Option value='2'>Switch by schedule scheckin</Select.Option>
         </Select>
       </div>
 
@@ -55,7 +55,7 @@ const ConditionsPage: React.FunctionComponent<Props> = props => {
         <InfoWrapper>
           <h3>Start Block</h3>
           <div>
-            Your trust fund would be distribted when it comes to block
+            living status switch at block: 
             {startBlock}
           </div>
           <InputNumber
