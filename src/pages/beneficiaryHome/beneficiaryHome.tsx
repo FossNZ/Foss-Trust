@@ -15,6 +15,7 @@ type Props = {
   grantorBalances: u128[];
   beneficiaries: Beneficiary[];
   setMainAccount: (account: InjectedAccount) => void;
+  withDraw: (assetID: number) => void;
   location: any;
 };
 
@@ -36,7 +37,8 @@ class BeneficiaryHomePage extends React.Component {
       setMainAccount,
       beneficiaries,
       location,
-      grantorBalances
+      grantorBalances,
+      withDraw
     } = this.props as Props;
 
     const totalWeight =
@@ -83,17 +85,38 @@ class BeneficiaryHomePage extends React.Component {
           </div>
           <br/>
           <br/>
-          {beneficiaries &&
-            beneficiaries.map(beneficiary => (
-              <div>
-                {beneficiary.address.toString()} :{' '}
-                {beneficiary.weight
-                  .muln(100)
-                  .div(totalWeight)
-                  .toString()}
-                %
-              </div>
-            ))}
+          <Button
+            type='primary'
+            style={{
+              marginLeft: '6rem',
+              marginTop: '2rem'
+            }}
+            onClick={() => withDraw(0)}
+          >WithDraw BTC</Button>
+          <Button
+            type='primary'
+            style={{
+              marginLeft: '6rem',
+              marginTop: '2rem'
+            }}
+            onClick={() => withDraw(1)}
+          >WithDraw ETH</Button>
+          <Button
+            type='primary'
+            style={{
+              marginLeft: '6rem',
+              marginTop: '2rem'
+            }}
+            onClick={() => withDraw(2)}
+          >WithDraw DAI</Button>
+          <Button
+            type='primary'
+            style={{
+              marginLeft: '6rem',
+              marginTop: '2rem'
+            }}
+            onClick={() => withDraw(3)}
+          >WithDraw USDT</Button>
         </div>
       </Wrapper>
     );

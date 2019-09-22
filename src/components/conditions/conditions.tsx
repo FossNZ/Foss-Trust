@@ -67,7 +67,7 @@ const ConditionsPage: React.FunctionComponent<Props> = props => {
             <Button
               type='primary'
               // TODO: This is the final value we need to send back to runtimemodule
-              onClick={() => console.log('Click', startBlock)}
+              onClick={() => updateCondition({ value: startBlock, typeId: ConditionType.BlockHeight})}
             >
               Confirm
             </Button>
