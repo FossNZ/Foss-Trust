@@ -3,7 +3,7 @@ import actions from "../actions";
 
 const grantorReducer = (state = null, action: AnyAction ) => {
     switch (action.type) {
-        case actions.SET_ACCOUNTS:
+        case actions.SET_GRANTOR_ADDRESS:
             return action.payload;
         default:
             return state;
