@@ -3,8 +3,10 @@ import ConditionPage from './conditions';
 import { Dispatch } from 'redux';
 import actions from '../../redux/actions';
 import { Condition } from '../../redux/epics/conditionEpic';
+import { State } from '../../types/state';
 
-const mapStateToProps = () => ({
+const mapStateToProps = ({blockHeight}: State)  => ({
+  blockHeight
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

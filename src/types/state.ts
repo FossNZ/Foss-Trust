@@ -11,5 +11,6 @@ export type State = {
     grantorBalances: u128[],
     grantor: string,
     grantorBeneficiaries: Beneficiary[],
-    grantorCondition: any
+    grantorCondition: any,
+    blockHeight: string
 };
