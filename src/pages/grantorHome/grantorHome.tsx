@@ -7,6 +7,7 @@ import AccountPage from '../../components/account/AccountPage';
 import { u128 } from '@polkadot/types';
 import { Beneficiary } from '../../redux/epics/beneficiariesEpic';
 import BN from 'bn.js';
+import styled from 'styled-components';
 
 type Props = {
   accounts: InjectedAccount[];
@@ -16,6 +17,8 @@ type Props = {
   setMainAccount: (account: InjectedAccount) => void;
   location: any;
 };
+
+const BalanceContainer = styled.div``;
 
 class GrantorHomePage extends React.Component {
   state = {
@@ -57,20 +60,22 @@ class GrantorHomePage extends React.Component {
             mainAccount={mainAccount}
             setMainAccount={setMainAccount}
           />
-          <div>BTC: {balances[0] ? balances[0].toString() : 0}</div>
-          <div>ETH: {balances[1] ? balances[1].toString() : 0}</div>
-          <div>DAI: {balances[2] ? balances[2].toString() : 0}</div>
-          <div>USTD: {balances[3] ? balances[3].toString() : 0}</div>
-          {beneficiaries.map(beneficiary => (
-            <div>
-              {beneficiary.address.toString()} :{' '}
-              {beneficiary.weight
-                .muln(100)
-                .div(totalWeight)
-                .toString()}
-              %
-            </div>
-          ))}
+          <BalanceContainer>
+            <div>BTC: {balances[0] ? balances[0].toString() : 0}</div>
+            <div>ETH: {balances[1] ? balances[1].toString() : 0}</div>
+            <div>DAI: {balances[2] ? balances[2].toString() : 0}</div>
+            <div>USTD: {balances[3] ? balances[3].toString() : 0}</div>
+            {beneficiaries.map(beneficiary => (
+              <div>
+                {beneficiary.address.toString()} :{' '}
+                {beneficiary.weight
+                  .muln(100)
+                  .div(totalWeight)
+                  .toString()}
+                %
+              </div>
+            ))}
+          </BalanceContainer>
         </div>
       </Wrapper>
     );
