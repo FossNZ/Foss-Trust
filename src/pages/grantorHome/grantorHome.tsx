@@ -7,6 +7,8 @@ import AccountPage from '../../components/account/AccountPage';
 import { u128 } from '@polkadot/types';
 import { Beneficiary } from '../../redux/epics/beneficiariesEpic';
 import BN from 'bn.js';
+import styled from 'styled-components';
+import { Icon } from 'antd';
 
 type Props = {
   accounts: InjectedAccount[];
@@ -19,6 +21,19 @@ type Props = {
   location: any;
 };
 
+const BalanceTitle = styled.h3`
+  display: inline-block;
+`;
+
+const BalanceContainer = styled.div`
+  padding: 24px;
+`;
+
+const BalanceInfo = styled.div`
+  width: 4rem;
+  display: inline-block;
+`;
+
 class GrantorHomePage extends React.Component {
   state = {
     collapsed: false
@@ -30,8 +45,19 @@ class GrantorHomePage extends React.Component {
   };
 
   render() {
-    const { accounts, mainAccount, balances, setMainAccount, beneficiaries, condition, location } = this.props as Props;
-    const totalWeight = beneficiaries.reduce((acc, beneficiary) => acc.add(beneficiary.weight), new BN(0));
+    const {
+      accounts,
+      mainAccount,
+      balances,
+      setMainAccount,
+      beneficiaries,
+      condition,
+      location
+    } = this.props as Props;
+    const totalWeight = beneficiaries.reduce(
+      (acc, beneficiary) => acc.add(beneficiary.weight),
+      new BN(0)
+    );
 
     return (
       <Wrapper>
@@ -46,20 +72,43 @@ class GrantorHomePage extends React.Component {
             mainAccount={mainAccount}
             setMainAccount={setMainAccount}
           />
-          <div>
-            BTC: {balances[0] ? balances[0].toString() : 0}
-          </div>
-          <div>
-            ETH: {balances[1] ? balances[1].toString() : 0}
-          </div>
-          <div>
-            DAI: {balances[2] ? balances[2].toString() : 0}
-          </div>
-          <div>
-            USTD: {balances[3] ? balances[3].toString() : 0}
-          </div>
-          {beneficiaries.map(beneficiary => <div>{beneficiary.address.toString()} : {beneficiary.weight.muln(100).div(totalWeight).toString()}%</div>)}
-          {(condition && condition !== {}) ? condition.toString() : ''}
+          <BalanceContainer>
+            <div>
+              <Icon type='wallet' /> <BalanceTitle>Balances:</BalanceTitle>
+            </div>
+            <div>
+              <div>
+                <BalanceInfo>BTC:</BalanceInfo>
+                {balances[0] ? balances[0].toString() : 0}
+              </div>
+              <div>
+                <BalanceInfo>ETH:</BalanceInfo>
+                {balances[1] ? balances[1].toString() : 0}
+              </div>
+              <div>
+                <BalanceInfo>DAI:</BalanceInfo>
+                {balances[2] ? balances[2].toString() : 0}
+              </div>
+              <div>
+                <BalanceInfo>USTD: </BalanceInfo>
+                {balances[3] ? balances[3].toString() : 0}
+              </div>
+            </div>
+          </BalanceContainer>
+          {beneficiaries.map(beneficiary => (
+            <div>
+              {beneficiary.address.toString()} :{' '}
+              {beneficiary.weight
+                .muln(100)
+                .div(totalWeight)
+                .toString()}
+              %
+            </div>
+          ))}
+          <BalanceContainer>
+            Conditions:
+            {condition && condition !== {} ? condition.toString() : ''}
+          </BalanceContainer>
         </div>
       </Wrapper>
     );

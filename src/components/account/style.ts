@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   padding: 24px;
   background: #fff;
-  min-height: 250px;
+  min-height: 150px;
 `;
 
 export const Name = styled.div`
