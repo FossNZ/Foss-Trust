@@ -7,5 +7,6 @@ export type State = {
     mainAccount: InjectedAccount,
     balances: u128[],
     beneficiaries: Beneficiary[],
-    condition: any
+    condition: any,
+    grantorBalances: u128[]
 };

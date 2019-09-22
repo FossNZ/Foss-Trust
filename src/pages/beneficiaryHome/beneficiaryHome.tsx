@@ -12,6 +12,7 @@ type Props = {
   accounts: InjectedAccount[];
   mainAccount: InjectedAccount;
   balances: u128[];
+  grantorBalances: u128[];
   beneficiaries: Beneficiary[];
   setMainAccount: (account: InjectedAccount) => void;
   location: any;
@@ -34,7 +35,8 @@ class BeneficiaryHomePage extends React.Component {
       balances,
       setMainAccount,
       beneficiaries,
-      location
+      location,
+      grantorBalances
     } = this.props as Props;
 
     const totalWeight =
@@ -64,6 +66,23 @@ class BeneficiaryHomePage extends React.Component {
               <div>USTD: {balances[3] ? balances[3].toString() : 0}</div>
             </div>
           )}
+          <br/>
+          <br/>
+          <div>Grantor balances</div>
+          <div>
+            BTC: {grantorBalances[0] ? grantorBalances[0].toString() : 0}
+          </div>
+          <div>
+            ETH: {grantorBalances[1] ? grantorBalances[1].toString() : 0}
+          </div>
+          <div>
+            DAI: {grantorBalances[2] ? grantorBalances[2].toString() : 0}
+          </div>
+          <div>
+            USTD: {grantorBalances[3] ? grantorBalances[3].toString() : 0}
+          </div>
+          <br/>
+          <br/>
           {beneficiaries &&
             beneficiaries.map(beneficiary => (
               <div>
