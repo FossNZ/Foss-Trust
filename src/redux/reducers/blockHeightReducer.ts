@@ -1,11 +1,9 @@
 import { AnyAction } from "redux";
 import actions from "../actions";
 
-const initialState  = {};
-
-const grantorConditionReducer = (state = initialState, action: AnyAction ) => {
+const blockHeightReducer = (state = null, action: AnyAction ) => {
     switch (action.type) {
-        case actions.SET_GRANTOR_CONDITION: {
+        case actions.SET_BLOCK_HEIGHT: {
             return action.payload;
         }
         default:
@@ -13,4 +11,4 @@ const grantorConditionReducer = (state = initialState, action: AnyAction ) => {
     }
 }
 
-export default grantorConditionReducer;
+export default blockHeightReducer;

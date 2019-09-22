@@ -1,4 +1,4 @@
-import { ofType, ActionsObservable, StateObservable } from "redux-observable";
+import { ofType, ActionsObservable, StateObservable, combineEpics } from "redux-observable";
 import { AnyAction } from "redux";
 import { map, switchMap } from 'rxjs/operators';
 import actions from "../actions";
@@ -33,4 +33,16 @@ const initSignerEpic = (
         
     );
 
-export default initSignerEpic;
+const initBlockHeightEpic = (
+        action$: ActionsObservable<AnyAction>
+      ): Observable<AnyAction> =>
+        action$.pipe(
+          ofType(actions.INIT),
+          map(() => {
+            return {
+              type: actions.FETCH_BLOCKHEIGHT
+            }
+          })
+        );
+
+export default combineEpics(initSignerEpic, initBlockHeightEpic);

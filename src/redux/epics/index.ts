@@ -8,6 +8,7 @@ import grantorBalanceEpic from './grantorBalanceEpic';
 import withDrawEpic from './withDrawEpic';
 import grantorBeneficiariesEpic from './grantorBeneficiariesEpic';
 import grantorConditionEpic from './grantorConditionEpic';
+import blockHeightEpic from './blockHeightEpic';
 
 const epics: any[] = [
     accountEpic,
@@ -18,7 +19,8 @@ const epics: any[] = [
     grantorBalanceEpic,
     withDrawEpic,
     grantorBeneficiariesEpic,
-    grantorConditionEpic
+    grantorConditionEpic,
+    blockHeightEpic
 ]
 
 const rootEpics = (...args: any[]) => combineEpics(...epics)(...args);

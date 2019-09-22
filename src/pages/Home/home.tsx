@@ -12,7 +12,7 @@ const Title = styled.div`
   cursor: pointer;
   color: white;
   font-weight: 500;
-  font-size: 5rem;
+  font-size: 4rem;
   height: 2.5rem;
   font-style: italic;
 

@@ -67,7 +67,6 @@ const conditionEpic = (
         switchMap(([[api], {mainAccount}]) => 
             api.query.trustFund.livingSwitchConds(mainAccount.address)),
         map(condition => {
-          console.log('condition', condition)
           return {
           type: actions.SET_CONDITION,
           payload: condition

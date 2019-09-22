@@ -22,10 +22,11 @@ const Buttonrapper = styled.div`
 
 type Props = {
   updateCondition: (condition: Condition) => void;
+  blockHeight: string;
 };
 
 const ConditionsPage: React.FunctionComponent<Props> = props => {
-  const { updateCondition } = props;
+  const { updateCondition, blockHeight} = props;
 
   const [startBlock, setStartBlock] = useState(1);
   const [startTime, setStartTime] = useState();
@@ -36,7 +37,6 @@ const ConditionsPage: React.FunctionComponent<Props> = props => {
     <Wrapper>
       <Title>Conditions</Title>
       <div>Choose the conditions for the start date of your turst fund</div>
-
       <div>
         <Select
           showSearch
@@ -53,7 +53,8 @@ const ConditionsPage: React.FunctionComponent<Props> = props => {
 
       {condition === '0' && (
         <InfoWrapper>
-          <h3>Start Block</h3>
+          <h3>Switch at block</h3>
+          <h5>Current Block Height: {blockHeight}</h5>
           <div>
             living status switch at block: 
             {startBlock}
